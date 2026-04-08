@@ -1,13 +1,184 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base typography and rendering ─────────────────────────────────────── */
+@layer base {
+  html {
+    font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ─── Month change: physical page flip cue ─────────────────────────────── */
+@keyframes monthSlideOut {
+  from {
+    opacity: 1;
+    transform: perspective(1400px) rotateX(0deg) translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(1400px) rotateX(18deg) translateY(-32px) scale(0.987);
+  }
+}
+
+@keyframes monthSlideIn {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateX(-14deg) translateY(30px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1400px) rotateX(0deg) translateY(0) scale(1);
+  }
+}
+
+.month-slide-out {
+  animation: monthSlideOut 220ms cubic-bezier(0.36, 0.08, 0.42, 0.95) forwards;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+}
+
+.month-slide-in {
+  animation: monthSlideIn 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: 50% 100%;
+  transform-style: preserve-3d;
+}
+
+.month-flip-shell {
+  position: relative;
+  backface-visibility: hidden;
+}
+
+.month-flip-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.16), transparent 44%);
+}
+
+.month-flip-shadow-out::after {
+  opacity: 1;
+}
+
+.month-flip-shadow-in::after {
+  opacity: 0.42;
+}
+
+/* ─── Wall-mounted realism ──────────────────────────────────────────────── */
+.wall-mounted-calendar {
+  transform-origin: top center;
+}
+
+.wall-mounted-calendar::before {
+  content: "";
+  position: absolute;
+  inset: 26px 18px -16px;
+  border-radius: 32px;
+  pointer-events: none;
+  z-index: -30;
+  filter: blur(12px);
+  background: rgba(15, 23, 42, 0.22);
+}
+
+.wall-mounted-calendar::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: -30px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 45;
+  background:
+    radial-gradient(circle at 8% 50%, rgba(71, 85, 105, 0.56) 0 2px, rgba(248, 250, 252, 0.7) 2.1px 3.1px, transparent 3.2px),
+    radial-gradient(circle at 92% 50%, rgba(71, 85, 105, 0.56) 0 2px, rgba(248, 250, 252, 0.7) 2.1px 3.1px, transparent 3.2px);
+}
+
+.dark .wall-mounted-calendar::before {
+  background: rgba(2, 6, 23, 0.44);
+}
+
+.dark .wall-mounted-calendar::after {
+  background:
+    radial-gradient(circle at 8% 50%, rgba(148, 163, 184, 0.56) 0 2px, rgba(203, 213, 225, 0.38) 2.1px 3.1px, transparent 3.2px),
+    radial-gradient(circle at 92% 50%, rgba(148, 163, 184, 0.56) 0 2px, rgba(203, 213, 225, 0.38) 2.1px 3.1px, transparent 3.2px);
+}
+
+/* ─── Progressive range fill feel ───────────────────────────────────────── */
+@keyframes rangeFill {
+  from {
+    opacity: 0.45;
+    transform: scaleX(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.range-fill {
+  animation: rangeFill 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left center;
+}
+
+.day-range-end.range-fill {
+  transform-origin: right center;
+}
+
+/* ─── Fade-in for hero image on mount ───────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.5s ease-out forwards;
+}
+
+/* ─── Custom scrollbar ───────────────────────────────────────────────────── */
+.notes-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.notes-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notes-scroll::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.35);
+  border-radius: 8px;
+}
+
+.notes-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.65);
+}
+
+/* ─── Range strip shape continuity ──────────────────────────────────────── */
+.day-in-range {
+  border-radius: 0;
+}
+
+.day-range-start {
+  border-radius: 9999px 0 0 9999px;
+}
+
+.day-range-end {
+  border-radius: 0 9999px 9999px 0;
+}
+
+.day-range-start.day-range-end {
+  border-radius: 9999px;
 }

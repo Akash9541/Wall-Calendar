@@ -4,9 +4,9 @@ A polished React + Tailwind CSS interactive calendar component designed to repli
 
 ---
 
-## 🎯 Challenge Alignment
+##  Challenge Alignment
 
-### ✅ Core Requirements
+###  Core Requirements
 
 **1. Wall Calendar Aesthetic**
 - Realistic wall-calendar design with top binding rings
@@ -35,7 +35,7 @@ A polished React + Tailwind CSS interactive calendar component designed to repli
 
 ---
 
-## ✨ Creative Enhancements
+##  Creative Enhancements
 
 - Smooth month transition animation (slide + fade + subtle 3D effect)
 - Theme toggle (light/dark mode) with persistence
