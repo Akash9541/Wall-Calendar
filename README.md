@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Interactive Wall Calendar (Frontend Engineering Challenge)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A polished React + Tailwind CSS interactive calendar component designed to replicate a real-world wall calendar experience, with a strong focus on UI/UX, responsiveness, and interaction design.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🎯 Challenge Alignment
 
-### `npm start`
+### ✅ Core Requirements
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**1. Wall Calendar Aesthetic**
+- Realistic wall-calendar design with top binding rings
+- Integrated hero image and calendar layout
+- Layered shadows and subtle page-depth effects to simulate physical paper
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**2. Day Range Selector**
+- Click once to select start date
+- Click again to select end date
+- Third click resets selection
+- Clear visual states for:
+  - Start date
+  - End date
+  - In-range dates
+  - Hover preview
 
-### `npm test`
+**3. Integrated Notes Section**
+- Notes can be attached to a single date or a date range
+- Manual save + auto-save on blur
+- Editable and deletable notes
+- Persistent storage using `localStorage`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**4. Fully Responsive Design**
+- Desktop: side-by-side layout (image + calendar + notes)
+- Mobile: stacked layout with full interaction support
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ✨ Creative Enhancements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Smooth month transition animation (slide + fade + subtle 3D effect)
+- Theme toggle (light/dark mode) with persistence
+- Holiday indicators with tooltips
+- Monday-first calendar layout
+- “Today” quick navigation
+- Micro-interactions and animation for improved UX
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
+## Tech Stack
 
-### `npm run eject`
+- React 19 (CRA)
+- Tailwind CSS v3
+- date-fns v4
+- localStorage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Run Locally
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Open [http://localhost:3000].
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Production Build
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Tests
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+CI=true npm test -- --watchAll=false
+```
 
-### Code Splitting
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```text
+src/
+├── components/
+│   ├── Calendar.jsx
+│   ├── CalendarGrid.jsx
+│   ├── HeroImage.jsx
+│   ├── NotesPanel.jsx
+│   └── ThemeToggle.jsx
+├── utils/
+│   └── dateUtils.jsx
+├── App.js
+├── App.test.js
+└── index.css
+```
